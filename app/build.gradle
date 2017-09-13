@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.gx.richtext"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+
+    compile project(':richtextlibrary')
+
+    // 编辑时选择图片  需要用到第三方的图片选择器 https://github.com/donglua/PhotoPicker
+    // 注：此处的选择器可自己替换成想要的第三方库，但是选择图片之后返回的必须是File对象类型
+    compile 'me.iwf.photopicker:PhotoPicker:0.8.4@aar'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+}
