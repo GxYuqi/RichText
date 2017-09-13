@@ -21,6 +21,36 @@
 　　　　compile 'com.github.developergx:RichText:1.0.0'
 　}
   ```
+* Step 3: xml using
+ ```xml
+　<com.gx.richtextlibrary.RichTextView
+        android:id="@+id/loading_richtext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:textColor="#797979"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        android:overScrollMode="never" />
+  ```
+* Step 4: code using
+ ```xml
+　// 加载HTML，使用正则表达式区分出文字和图片，然后加载
+  richTextView.post(new Runnable() {
+      @Override
+      public void run() {
+          richTextView.clearAllLayout();
+          List<String> list = StringUtils.cutStringByImgTag(" 需要加载的 HTML ");
+          for (String s:list){
+              if(s.contains("<img") && s.contains("src=")){
+                   richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(s));
+              }else{
+                   richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(s).toString());
+              }
+          }
+      }
+  });
+  ```
   <br>
-#### 如结合项目使用，请参考完整代码！<br><br>
+#### 以上是显示的步骤，具体的编辑使用方法，请参考完整代码！<br><br>
 That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts.<br>
