@@ -21,5 +21,6 @@
 　　　　compile 'com.github.developergx:RichText:1.0.0'
 　}
   ```
-#### 项目中使用，请参考完整代码！<br><br>
+  <br>
+#### 如结合项目使用，请参考完整代码！<br><br>
 That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts.<br>
