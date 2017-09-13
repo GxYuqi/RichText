@@ -41,16 +41,18 @@
       public void run() {
           richTextView.clearAllLayout();
           List<String> list = StringUtils.cutStringByImgTag(" 需要加载的 HTML ");
-          for (String s:list){
-              if(s.contains("<img") && s.contains("src=")){
-                   richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(s));
+          for (String str:list){
+              if(str.contains("<img")){
+                  if(str.contains("src=")){
+                      richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(str));
+                  }
               }else{
-                   richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(s).toString());
+                  richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(str).toString());
               }
           }
       }
   });
   ```
   <br>
-#### 以上是显示的步骤，具体的编辑使用方法，请参考完整代码！<br><br>
+#### 以上是显示的方法步骤，具体的编辑使用方法，请参考完整代码！<br><br>
 That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts.<br>
