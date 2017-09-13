@@ -21,7 +21,7 @@
 　　　　compile 'com.github.developergx:RichText:1.0.0'
 　}
   ```
-* Step 3: xml using
+* Step 3: xml 中使用
  ```xml
 　<com.gx.richtextlibrary.RichTextView
         android:id="@+id/loading_richtext"
@@ -33,7 +33,7 @@
         android:fadingEdge="none"
         android:overScrollMode="never" />
   ```
-* Step 4: code using
+* Step 4: 代码中使用
  ```xml
 　// 加载HTML，使用正则表达式区分出文字和图片，然后加载
   richTextView.post(new Runnable() {
