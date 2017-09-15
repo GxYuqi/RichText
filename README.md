@@ -1,7 +1,7 @@
 # RichText
 [![](https://jitpack.io/v/developergx/RichText.svg)](https://jitpack.io/#developergx/RichText)<br><br>
-用于加载 HTML 标签语言，显示 or 编辑 文字与图片混合排序<br>
-在编辑的时候，支持从中间插入文字或图片<br><br>
+用于加载 HTML 标签语言，显示 或 编辑 文字与图片混合排序<br>
+在编辑的时候，支持从中间 插入 或 删除 文字和图片<br><br>
 #### 效果图：
 ![](https://github.com/developergx/RichText/blob/master/preview.gif)<br><br>
 #### 使用方法
