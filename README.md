@@ -47,5 +47,5 @@ HTML 必须是以下格式<br>
   * 如果HTML格式不是以上所描述，会漏掉某些字符的解析，如果非要更改HTML格式，请下载 Library 之后自行修改正则表达式
   */
  ```
-#### 以上是显示图文的方法步骤，具体的编辑和创建的使用方法，请参考完整代码实例！<br><br>
+#### 以上是显示图文的方法步骤，具体的编辑和创建的使用方法，请参考完整代码示例！<br><br>
 That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts.<br>
