@@ -35,22 +35,7 @@
 * Step 4: 代码中使用
  ```xml
 　// 加载HTML，使用正则表达式区分出文字和图片，然后加载
-  richTextView.post(new Runnable() {
-      @Override
-      public void run() {
-          richTextView.clearAllLayout();
-          List<String> list = StringUtils.cutStringByImgTag(" 需要加载的 HTML ");
-          for (String str:list){
-              if(str.contains("<img")){
-                  if(str.contains("src=")){
-                      richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(str));
-                  }
-              }else{
-                  richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(str).toString());
-              }
-          }
-      }
-  });
+  richTextView.showContent(richTextView, " 需要加载的 HTML ");
   ```
   <br>
 HTML 必须是以下格式<br>
