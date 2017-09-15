@@ -30,20 +30,7 @@ public class LoadingActivity extends AppCompatActivity {
         richTextView = (RichTextView) findViewById(R.id.loading_richtext);
 
         // 加载HTML，使用正则表达式区分出文字和图片，然后加载
-        richTextView.post(new Runnable() {
-            @Override
-            public void run() {
-                richTextView.clearAllLayout();
-                List<String> list = StringUtils.cutStringByImgTag(html);
-                for (String s:list){
-                    if(s.contains("<img") && s.contains("src=")){
-                        richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(s));
-                    }else{
-                        richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(s).toString());
-                    }
-                }
-            }
-        });
+        richTextView.showContent(richTextView, html);
 
     }
 

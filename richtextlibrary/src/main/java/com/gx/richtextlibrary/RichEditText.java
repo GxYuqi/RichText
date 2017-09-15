@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -59,34 +60,12 @@ public class RichEditText extends ScrollView {
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
         addView(linearLayout,layoutParams);
-        // ----------------
-//        keyListener = new OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-//                    EditText edit = (EditText) v;
-//                    onBackspacePress(edit);
-//                }
-//                return false;
-//            }
-//        };
-        // ----------------
-//        focusListener = new OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus) {
-//                    lastFocusEdit = (DeletableEditText) v;
-//                }
-//            }
-//        };
-        // ----------------
         LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         EditText editText = (DeletableEditText) layoutInflater.inflate(R.layout.richedittext,null);
         editText.setTag(viewTagIndex++);
         editText.setHint("编辑您的内容...");
         linearLayout.addView(editText, firstEditParam);
         lastFocusEdit = editText;
-
     }
 
     /**
@@ -326,6 +305,60 @@ public class RichEditText extends ScrollView {
      */
     public void clearAllLayout() {
         linearLayout.removeAllViews();
+    }
+
+    /**
+     * 显示 HTML
+     * @param richEditText
+     * @param html
+     */
+    public void showContent(final RichEditText richEditText, final String html){
+        post(new Runnable() {
+            @Override
+            public void run() {
+                richEditText.clearAllLayout();
+                List<String> list = StringUtils.cutStringByImgTag(html);
+                for (String s:list){
+                    if(s.contains("<img") && s.contains("src=")){
+                        richEditText.createImageView(richEditText.getLastIndex(),StringUtils.getImgSrc(s));
+                    }else{
+                        richEditText.createEditText(richEditText.getLastIndex(),s);
+                    }
+                }
+                richEditText.createEditText(richEditText.getLastIndex());
+                // 加载完毕之后将视图移动到最底部，方便继续编辑
+                richEditText.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        richEditText.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                },500);
+            }
+        });
+    }
+
+    /**
+     * 构建 HTML
+     * @param richEditText
+     * @return
+     */
+    public String buildHtml(RichEditText richEditText){
+        StringBuilder stringBuilder = new StringBuilder();
+        List<RichEditText.EditData> editList = richEditText.buildEditData();
+        for (RichEditText.EditData itemData : editList) {
+            if (itemData.inputStr != null) {
+                stringBuilder.append(itemData.inputStr);
+            } else if (itemData.imagePath != null) {
+                stringBuilder.append("<img src=\"").append(itemData.imagePath).append("\"/>");
+            }
+        }
+        String result = stringBuilder.toString();
+        if(result.equals("") || TextUtils.isEmpty(result) || result == null){
+            Toast.makeText(context, "请编辑内容！", Toast.LENGTH_SHORT).show();
+            return "";
+        }else{
+            return result;
+        }
     }
 
 }

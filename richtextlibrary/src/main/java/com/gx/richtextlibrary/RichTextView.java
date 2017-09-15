@@ -3,6 +3,7 @@ package com.gx.richtextlibrary;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.gx.richtextlibrary.R;
+
+import java.util.List;
 
 /**
  * Created by gx on 2017/7/22
@@ -141,6 +144,28 @@ public class RichTextView extends ScrollView {
      */
     public void clearAllLayout() {
         linearLayout.removeAllViews();
+    }
+
+    /**
+     * 显示 HTML
+     * @param richTextView
+     * @param html
+     */
+    public void showContent(final RichTextView richTextView, final String html){
+        post(new Runnable() {
+            @Override
+            public void run() {
+                richTextView.clearAllLayout();
+                List<String> list = StringUtils.cutStringByImgTag(html);
+                for (String s:list){
+                    if(s.contains("<img") && s.contains("src=")){
+                        richTextView.createImageView(richTextView.getLastIndex(),StringUtils.getImgSrc(s));
+                    }else{
+                        richTextView.createTextView(richTextView.getLastIndex(), Html.fromHtml(s).toString());
+                    }
+                }
+            }
+        });
     }
 
 }

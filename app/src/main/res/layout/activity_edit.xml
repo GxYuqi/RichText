@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <Button
         android:id="@+id/edit_save"
@@ -21,14 +22,11 @@
         android:id="@+id/edit_richtext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:fadingEdge="none"
         android:overScrollMode="never"
         android:scrollbars="none"
         android:textColor="#797979"
-        android:textSize="14sp">
-    </com.gx.richtextlibrary.RichEditText>
+        android:textSize="14sp"/>
 
 </LinearLayout>

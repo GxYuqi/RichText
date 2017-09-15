@@ -12,14 +12,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gx.richtextlibrary.ImageUtils;
 import com.gx.richtextlibrary.RichEditText;
 import com.gx.richtextlibrary.SDCardUtil;
 import com.gx.richtextlibrary.ScreenUtils;
-import com.gx.richtextlibrary.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class EditActivity extends AppCompatActivity {
     private RichEditText richEditText;
 
     private AlertDialog pullLoading;
-    private StringBuilder stringBuilder;
     private TextView pushNum;
 
     @Override
@@ -68,30 +66,8 @@ public class EditActivity extends AppCompatActivity {
 
         // 如果是编辑 就 先加载
         if(!TextUtils.isEmpty(html)){
-            richEditText.post(new Runnable() {
-                @Override
-                public void run() {
-                    richEditText.clearAllLayout();
-                    List<String> list = StringUtils.cutStringByImgTag(html);
-                    for (String s:list){
-                        if(s.contains("<img") && s.contains("src=")){
-                            richEditText.createImageView(richEditText.getLastIndex(),StringUtils.getImgSrc(s));
-                        }else{
-                            richEditText.createEditText(richEditText.getLastIndex(),s);
-                        }
-                    }
-                    richEditText.createEditText(richEditText.getLastIndex());
-                    // 加载完毕之后将视图移动到最底部，方便继续编辑
-                    richEditText.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            richEditText.fullScroll(ScrollView.FOCUS_DOWN);
-                        }
-                    },500);
-                }
-            });
+            richEditText.showContent(richEditText, html);
         }
-
     }
 
     /**
@@ -179,26 +155,13 @@ public class EditActivity extends AppCompatActivity {
     }
 
     /**
-     * 编辑完成保存，stringBuilder.toString() 的结果就是一个编辑之后的 html
+     * 编辑完成保存，String 的内容就是编辑之后的 html
      */
     private void getEditData() {
-        stringBuilder = new StringBuilder();
-        View view = richEditText.getChildAt(0);
-        if(view instanceof EditText){
-            EditText editText = (EditText) view;
-            if(TextUtils.isEmpty(editText.getText().toString().trim())){
-                return;
-            }
+        String result = richEditText.buildHtml(richEditText);
+        if(!result.equals("")){
+            Log.d("GxMessage", "html = " + result);
         }
-        List<RichEditText.EditData> editList = richEditText.buildEditData();
-        for (RichEditText.EditData itemData : editList) {
-            if (itemData.inputStr != null) {
-                stringBuilder.append(itemData.inputStr);
-            } else if (itemData.imagePath != null) {
-                stringBuilder.append("<img src=\"").append(itemData.imagePath).append("\"/>");
-            }
-        }
-        Log.d("GxMessage", "stringBuilder = " + stringBuilder.toString());
     }
 
 }

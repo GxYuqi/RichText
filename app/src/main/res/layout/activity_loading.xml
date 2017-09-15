@@ -15,7 +15,6 @@
         android:textColor="#797979"
         android:scrollbars="none"
         android:fadingEdge="none"
-        android:overScrollMode="never" >
-    </com.gx.richtextlibrary.RichTextView>
+        android:overScrollMode="never" />
 
 </LinearLayout>
