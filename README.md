@@ -5,8 +5,7 @@
 #### 效果图：
 ![](https://github.com/developergx/RichText/blob/master/preview.gif)<br><br>
 #### 使用方法
-* Step 1: Add the JitPack repository to your build file<br>
-　　　Add it in your root build.gradle at the end of repositories:<br>
+* Step 1: 将 JitPack 存储库添加到项目的根构建文件中<br>
  ```xml
 　allprojects {
 　　　repositories {
@@ -15,7 +14,7 @@
 　　　}
 　}
   ```
-* Step 2: Add the dependency
+* Step 2: 添加依赖关系
  ```xml
 　dependencies {
 　　　　compile 'com.github.developergx:RichText:1.0.0'
