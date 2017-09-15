@@ -54,5 +54,12 @@
   });
   ```
   <br>
+HTML 必须是以下格式<br>
+ ```xml
+ // 其中 <img 标签内容可随便写，只要保证内容包含 src="url" 就可以
+ 文字文字文字 <img src="url"/> 文字文字文字 <img src="url"/> 
+ // 如果HTML格式不是以上所描述，会漏掉某些字符的解析，如果非要更改HTML格式，请下载之后自行修改正则表达式
+ ```
+ <br>
 #### 以上是显示的方法步骤，具体的编辑使用方法，请参考完整代码！<br><br>
 That's it! The first time you request a project JitPack checks out the code, builds it and serves the build artifacts.<br>
