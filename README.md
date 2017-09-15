@@ -4,7 +4,7 @@
 在编辑的时候，支持从中间插入文字或图片<br><br>
 #### 效果图：
 ![](https://github.com/developergx/RichText/blob/master/preview.gif)<br><br>
-#### 依赖导入方法
+#### 使用方法
 * Step 1: Add the JitPack repository to your build file<br>
 　　　Add it in your root build.gradle at the end of repositories:<br>
  ```xml
