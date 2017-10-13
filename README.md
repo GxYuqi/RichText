@@ -36,6 +36,13 @@
  ```xml
 　// 加载HTML，使用正则表达式区分出文字和图片，然后加载
   richTextView.showContent(richTextView, " 需要加载的 HTML ");
+  // 给加载出来的图片设置点击事件
+  richTextView.setOnClickListener(new RichTextView.OnClickListener() {
+    @Override
+    public void onClick(ImageView view, String imageUrl) {
+      Toast.makeText(LoadingActivity.this, "点击了图片", Toast.LENGTH_SHORT).show();
+    }
+  }
   ```
   <br>
 HTML 必须是以下格式<br>
