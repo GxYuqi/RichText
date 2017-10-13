@@ -40,7 +40,7 @@
   richTextView.setOnClickListener(new RichTextView.OnClickListener() {
     @Override
     public void onClick(ImageView view, String imageUrl) {
-      Toast.makeText(LoadingActivity.this, "点击了图片", Toast.LENGTH_SHORT).show();
+      Toast.makeText(Activity.this, "点击了图片", Toast.LENGTH_SHORT).show();
     }
   }
   ```
