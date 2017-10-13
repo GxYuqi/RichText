@@ -31,6 +31,7 @@ public class RichTextView extends ScrollView {
     private int viewTagIndex = 1; // 新生的view都会打一个tag，对每个view来说，这个tag是唯一的。
     private LayoutInflater layoutInflater;
     private LinearLayout linearLayout;// 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
+    private OnClickListener onClickListener;
 
     private Activity activity;
     public void setWatchActivity(Activity activity){
@@ -71,14 +72,14 @@ public class RichTextView extends ScrollView {
      * @param index
      * @param url
      */
-    public void createImageView(final int index, String url){
+    public void createImageView(final int index, final String url){
         final RelativeLayout relativeLayout = (RelativeLayout) layoutInflater.inflate(R.layout.richimageview,null);
         final CostomImageView imageview = (CostomImageView) relativeLayout.findViewById(R.id.edit_imageView);
         imageview.setTag(viewTagIndex++);
         imageview.setAbsolutePath(url);
         ImageView close = (ImageView) relativeLayout.findViewById(R.id.image_close);
         close.setVisibility(GONE);
-        close.setOnClickListener(new OnClickListener() {
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 linearLayout.removeView(relativeLayout);
@@ -105,6 +106,14 @@ public class RichTextView extends ScrollView {
                                 lp.bottomMargin = 10;
                                 lp.topMargin = 4;
                                 imageview.setLayoutParams(lp);
+                                imageview.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if(onClickListener != null){
+                                            onClickListener.onClick((ImageView) view, url);
+                                        }
+                                    }
+                                });
                             }
                         });
             }
@@ -127,6 +136,14 @@ public class RichTextView extends ScrollView {
                         lp.bottomMargin = 10;
                         lp.topMargin = 4;
                         imageview.setLayoutParams(lp);
+                        imageview.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if(onClickListener != null){
+                                    onClickListener.onClick((ImageView) view, url);
+                                }
+                            }
+                        });
                     }
                 });
     }
@@ -166,6 +183,14 @@ public class RichTextView extends ScrollView {
                 }
             }
         });
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(ImageView view, String imageUrl);
     }
 
 }

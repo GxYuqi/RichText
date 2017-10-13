@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RichText.iml" filepath="$PROJECT_DIR$/RichText.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RichText.iml" filepath="$PROJECT_DIR$/RichText.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/richtextlibrary/richtextlibrary.iml" filepath="$PROJECT_DIR$/richtextlibrary/richtextlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/richtextlibrary/richtextlibrary.iml" filepath="$PROJECT_DIR$/richtextlibrary/richtextlibrary.iml" />
     </modules>
   </component>
